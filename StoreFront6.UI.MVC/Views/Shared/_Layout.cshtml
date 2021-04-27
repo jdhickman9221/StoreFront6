@@ -42,7 +42,7 @@
                         </p>
                     </div>
                     <div class="reg">
-                        <p class="mb-0"><a href="#" class="mr-2">Sign Up</a> <a href="#">Log In</a></p>
+                        @Html.Partial("_LoginPartial")
                     </div>
                 </div>
             </div>
@@ -59,21 +59,21 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-item d-flex align-items-start" href="#">
-                        <div class="img" style="background-image: url(images/prod-1.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/prod-1.jpg);"></div>
                         <div class="text pl-3">
                             <h4>Bacardi 151</h4>
                             <p class="mb-0"><a href="#" class="price">$25.99</a><span class="quantity ml-3">Quantity: 01</span></p>
                         </div>
                     </div>
                     <div class="dropdown-item d-flex align-items-start" href="#">
-                        <div class="img" style="background-image: url(images/prod-2.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/prod-2.jpg);"></div>
                         <div class="text pl-3">
                             <h4>Jim Beam Kentucky Straight</h4>
                             <p class="mb-0"><a href="#" class="price">$30.89</a><span class="quantity ml-3">Quantity: 02</span></p>
                         </div>
                     </div>
                     <div class="dropdown-item d-flex align-items-start" href="#">
-                        <div class="img" style="background-image: url(images/prod-3.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/prod-3.jpg);"></div>
                         <div class="text pl-3">
                             <h4>Citadelle</h4>
                             <p class="mb-0"><a href="#" class="price">$22.50</a><span class="quantity ml-3">Quantity: 01</span></p>
@@ -90,8 +90,12 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    @*<li class="nav-item active">
+        <a href="about.html" class="nav-link">About</a>
+        </li>*@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -103,13 +107,18 @@
                     </li>
                     @*<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>*@
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item nav-link">@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                    }
                 </ul>
             </div>
         </div>
     </nav>
     <!-- END nav -->
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url(../../content/images/bg_2.jpg);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text align-items-end justify-content-center">
@@ -185,37 +194,37 @@
             <div class="row">
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(images/kind-1.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/kind-1.jpg);"></div>
                         <h3>Brandy</h3>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(images/kind-2.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/kind-2.jpg);"></div>
                         <h3>Gin</h3>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(images/kind-3.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/kind-3.jpg);"></div>
                         <h3>Rum</h3>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(images/kind-4.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/kind-4.jpg);"></div>
                         <h3>Tequila</h3>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(images/kind-5.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/kind-5.jpg);"></div>
                         <h3>Vodka</h3>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 ">
                     <div class="sort w-100 text-center ftco-animate">
-                        <div class="img" style="background-image: url(images/kind-6.jpg);"></div>
+                        <div class="img" style="background-image: url(../../content/images/kind-6.jpg);"></div>
                         <h3>Whiskey</h3>
                     </div>
                 </div>
@@ -223,7 +232,7 @@
         </div>
     </section>
 
-    <section class="ftco-section testimony-section img" style="background-image: url(images/bg_4.jpg);">
+    <section class="ftco-section testimony-section img" style="background-image: url(../../content/images/bg_4.jpg);">
         <div class="overlay"></div>
         <div class="container">
             <div class="row justify-content-center mb-5">
@@ -241,7 +250,7 @@
                                 <div class="text">
                                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                                     <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
+                                        <div class="user-img" style="background-image: url(../../content/images/person_1.jpg)"></div>
                                         <div class="pl-3">
                                             <p class="name">Roger Scott</p>
                                             <span class="position">Marketing Manager</span>
@@ -256,7 +265,7 @@
                                 <div class="text">
                                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                                     <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
+                                        <div class="user-img" style="background-image: url(../../content/images/person_2.jpg)"></div>
                                         <div class="pl-3">
                                             <p class="name">Roger Scott</p>
                                             <span class="position">Marketing Manager</span>
@@ -271,7 +280,7 @@
                                 <div class="text">
                                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                                     <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
+                                        <div class="user-img" style="background-image: url(../../content/images/person_3.jpg)"></div>
                                         <div class="pl-3">
                                             <p class="name">Roger Scott</p>
                                             <span class="position">Marketing Manager</span>
@@ -286,7 +295,7 @@
                                 <div class="text">
                                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                                     <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
+                                        <div class="user-img" style="background-image: url(../../content/images/person_1.jpg)"></div>
                                         <div class="pl-3">
                                             <p class="name">Roger Scott</p>
                                             <span class="position">Marketing Manager</span>
@@ -301,7 +310,7 @@
                                 <div class="text">
                                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                                     <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
+                                        <div class="user-img" style="background-image: url(../../content/images/person_2.jpg)"></div>
                                         <div class="pl-3">
                                             <p class="name">Roger Scott</p>
                                             <span class="position">Marketing Manager</span>
@@ -451,5 +460,7 @@
     <script src="~/Content/js/google-map.js"></script>
     <script src="~/Content/js/main.js"></script>
 
+    @* SECTION ADDED Monday 04/26, this is required for the Login Partial to work. *@
+    @RenderSection("scripts", required: false)
 </body>
 </html>
