@@ -189,6 +189,7 @@
     <Content Include="Content\css\bootstrap\bootstrap-grid.css" />
     <Content Include="Content\css\bootstrap\bootstrap-reboot.css" />
     <Content Include="Content\css\css\bootstrap-reboot.css" />
+    <Content Include="Content\css\css\CustomStyles.css" />
     <Content Include="Content\css\css\mixins\_text-hide.css" />
     <Content Include="Content\css\flaticon.css" />
     <Content Include="Content\css\magnific-popup.css" />
