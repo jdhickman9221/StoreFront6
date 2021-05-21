@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using StoreFront6.DATA.EF;
+using static StoreFront6.UI.MVC.Models.RegisterViewModel;
 
 namespace StoreFront6.UI.MVC.Controllers
 {
@@ -16,7 +18,7 @@ namespace StoreFront6.UI.MVC.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -155,15 +157,29 @@ namespace StoreFront6.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    #region Assign UserDetails during registration
+                    UserDetail newUserDeets = new UserDetail();
+                    newUserDeets.UserID= user.Id;
+                    newUserDeets.FirstName = model.FirstName;
+                    newUserDeets.LastName = model.LastName;
+                    newUserDeets.Address = model.Address;
+                    newUserDeets.City = model.City;
+                    newUserDeets.State = model.State;
+                    newUserDeets.Zip = model.Zip;
+                    newUserDeets.Phone = model.Phone;
+                    newUserDeets.FavoriteColor = model.FavoriteColor;
 
-                    UserManager.AddToRole(user.Id, "User");
-                    return RedirectToAction("Index", "Home");
+                    StoreFrontEntities db = new StoreFrontEntities();                    
+                    db.UserDetails.Add(newUserDeets);
+                    db.SaveChanges();
+                    return View("Login");
+
+                    #endregion
                     //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                     //ViewBag.Link = callbackUrl;
                     //return View("DisplayEmail");
-
                 }
                 AddErrors(result);
             }

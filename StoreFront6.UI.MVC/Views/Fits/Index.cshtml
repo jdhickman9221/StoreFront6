@@ -1,0 +1,183 @@
+﻿@model IEnumerable<StoreFront6.DATA.EF.Fit>
+
+@{
+    ViewBag.Title = "Sizes";
+}
+
+<h2>@ViewBag.Title</h2>
+<div id="MessageContent"></div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FitName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FitName)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.FitID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.FitID }) |*@
+                @*@Html.ActionLink("Delete", "Delete", new { id=item.FitID })*@
+                <a href="" class="DetailsLink" id="@item.FitID">Details</a>
+                <a href="" class="EditLink" id="@item.FitID">Edit</a>
+
+
+
+                @Ajax.ActionLink("Delete", "AjaxDelete", new { id =item.FitID}, new AjaxOptions
+           {
+               HttpMethod="POST",
+               Confirm = $"Are you sure you want to delete {item.FitName} from Sizes?",
+               OnSuccess = "deleteConfirmed",
+               OnFailure = "deleteFailed"
+               //now create functions in the scripts section
+           })
+
+            </td>
+        </tr>
+    }
+    <div id="FitDetails"></div>
+</table>
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        //Ajax Delete
+        function deleteConfirmed(response, status, data) {
+            //remove the row from the table on the screen
+            var rowId = "#Fit-" + response.id;
+            $("#FitsTable").find(rowId).remove();
+            //display a status message to the user (using AJAX response message property)
+            $("#MessageContent").html("<div class = 'alert alert-success'>" + response.message + "</div>");
+        }
+
+        //failed Delete
+        function deleteFailed(response, status, data) {
+            //display a status message to user
+            $('#MessageContent').html("<div class = 'alert alert-danger'>Delete Unsuccessful. Is the size currently being referenced by a product? If so edit the product or delete the product itself.")
+        }
+
+        //Ajax Details
+        $('a.DetailsLink').click(function (e) {
+            e.preventDefault();//prevents page from reloading.
+            //target the pop up place holder div with the id of FitDetails.
+            //open details view in a popup with the correct fit.
+            $('#FitDetails').data('fId', $(this).attr('id')).dialog({
+                width: 400,
+                height: 200,
+                open: function () {
+                    var fitId = $(this).data('fId');
+                    $(this).load("/Fits/FitDetails/" + fitId);
+                },
+                title: "Size Details",
+                modal: true,
+                resizable: false
+            });
+        });
+
+        //Ajax Create
+        //show the create form
+        $("#FitCreate").hide();//start the page load with the create form hidden
+        $("toggleFitCreate").click(function () {
+            $('#PublisherCreate').toggle();//flip the create between show and hide.        
+        });
+
+        //when the form is submitted, we format data (serialize) the data. Then notification (MessageContent) shows status updates.
+        //After that, jQuery AJAX will:
+        //1. call the POST AjaxCreate action from publisher controller.
+        //2. pass json data from form
+        //3. on failure, notify the user of the error.
+        //4. on success notify user reset form, and 'add' through ajax.
+
+        $('#PubisherCreateForm').submit(function (e) {
+            var formData = $(this).serializeArray();//capturing all inputs from the form and storing them in a JSON array.
+            e.preventDefault();
+
+            $.ajax({
+                url: "/Fits/AjaxCreate",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                error: function (e) {
+                    $("MessageContent").html("<div class='alert alert-danger' There was a problem! </div>");
+                },
+                success: function (foo) {
+                    $("#MessageContent").html("<div class='alert alert-success'>Record Added!<div>");
+
+                    //reset form
+                    $('#PublisherCreateForm')[0].reset();
+                    //add the row with the code below.
+                    $(function () {
+                        var row = '<tr>' +
+                            '<td>' + foo.FitName + '<td>' + '<tr>'
+                        $('#PublishersTable').append(row);
+                            
+                    });
+                }
+            });
+        });
+
+        //ajax update
+        var originalContent = null;
+        $('a.EditLink').click(function (e) {
+            e.preventDefault();//keep page from refreshing.
+            var fitID = $(this).attr("id");
+
+            var row = $("#Fit-" + fitID).children();//find all table data for that specific row. 
+
+            orignalContent = {
+                FitID: fitID,
+                FitName: row[0].innerText
+            };
+            $.get("/Fits/FitsEdit/" + fitID, function (data) {
+                $('#Fit-' + fitID).replaceWith(
+                    '<tr id="Fit-' + fitID + '"><td colspan="5">' + data + '</td></tr>'
+                );
+            });
+        });
+
+        $(document).on("click", "#saveUpdate", function () {
+            //the code here is acting as the post functionality.
+            //serialize the data from the form
+            var formData = $('#FitEditForm').serializeArray();
+            //display a message to the user in the #messageContent
+            $("#MessageContent").html("<div class='alert alert-info'>Please Wait...</div>");
+            $.ajax({
+                url: "/Fits/AjaxEdit",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function (data) {
+                    $("#MessageContent").html("<div class='alert alert-success'>Your record was successfully updated!</div>");
+                    $("#FitEditForm")[0].reset();
+
+                    $(function () {
+                        var row = '<tr>' +
+                            '<td>' + data.FitName + '</td>' +
+                            '<td>Refresh to View Options</td>' + '</tr>';
+                        $('#Id-' + data.FitID).replaceWith(row);
+                    });
+                },
+                error: function (e) {
+                    $("#MessageContent").html("<div class='alert alert-warning'>There was an error. Please try again or contact site admin<div>");
+
+                    $(function () {
+                        var row = '<tr>' +
+                            '<td>' + data.FitName + '</td>' +
+                            '<td>Refresh to View Options</td>' + '</tr>';
+                        $('#Id-' + data.FitID).replaceWith(row);
+                    });
+                }
+            });
+        });
+    </script>
+}

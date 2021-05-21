@@ -8342,8 +8342,8 @@ h1, h2, h3, h4, h5,
   text-transform: uppercase; }
 
 .hero-wrap {
-  width: 100%;
-  background-size: cover;
+  width: 50%;
+  background-size:auto;
   background-repeat: no-repeat;
   background-position: top center;
   position: relative;
@@ -8393,7 +8393,7 @@ h1, h2, h3, h4, h5,
       line-height: 1.5;
       color: rgba(255, 255, 255, 0.9); }
   .hero-wrap.hero-wrap-2 {
-    height: 400px !important;
+    height: 300px !important;
     position: relative; }
     .hero-wrap.hero-wrap-2 .overlay {
       width: 100%;

@@ -79,34 +79,78 @@ namespace StoreFront6.UI.MVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-    }
-
-    public class ResetPasswordViewModel
-    {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [StringLength(50, ErrorMessage = "Must not be more than 50 characters, no less than 2.", MinimumLength = 2)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
 
-        public string Code { get; set; }
-    }
-
-    public class ForgotPasswordViewModel
-    {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [StringLength(75, ErrorMessage = "Must not be more than 75 characters, no less than 2.", MinimumLength = 2)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+
+        [Required]
+        public string Address { get; set; }
+
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Must not be more than 50 characters, no less than 2.", MinimumLength = 2)]
+        public string City { get; set; }
+
+
+        [Required]
+        [StringLength(2, ErrorMessage = "Must not be more than 2 characters, no less than 2.", MinimumLength = 2)]
+        public string State { get; set; }
+
+
+        [Required]
+        [StringLength(5, ErrorMessage = "Must not be more than 5 characters, no less than 5. Ex: 11111", MinimumLength = 5)]
+        public string Zip { get; set; }
+
+
+        [Required]
+        [StringLength(16, ErrorMessage = "Must not be more than 16 characters, no less than 10. Ex: 111-111-1111", MinimumLength = 10)]
+        [Display(Name = "Phone Number")]
+        public string Phone { get; set; }
+
+
+        [StringLength(7, ErrorMessage = "** Please Provide hexadecimal code including hashtag")]
+        [Display(Name = "Favorite Color")]
+        [Required]
+        public string FavoriteColor { get; set; }
+
+
+
+        public class ResetPasswordViewModel
+        {
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Display(Name = "Password")]
+            public string Password { get; set; }
+
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirm password")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
+
+            public string Code { get; set; }
+        }
+
+        public class ForgotPasswordViewModel
+        {
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+        }
     }
 }

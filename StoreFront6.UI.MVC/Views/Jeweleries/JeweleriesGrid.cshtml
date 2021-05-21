@@ -1,0 +1,80 @@
+﻿@model IEnumerable<StoreFront6.DATA.EF.Jewelery>
+
+@{
+    ViewBag.Title = "Shop";
+}
+
+
+
+@Html.Partial("_ProductTypes")
+
+
+<div class="d-flex justify-content-center">
+    <br />
+    <form method="get" action="/jeweleries/jeweleriesgrid" class="form-horizontal d-flex justify-content-center ">
+        <div class="form-group d-flex justify-content-center">
+            
+            <div class=" d-inline-flex justify-content-center" style="padding-top: 3em;">
+                <input class="text-center "type="text" name="searchFilter" placeholder="Name | Style | Size" />
+                <span><input type="submit" value="Filter" class="btn btn-outline-dark btn-" /></span>
+                @* The name attribute above must match the parameter that is passed into our Action in the controller. *@
+            </div>
+            <div class="col-xs-offset-1 col-xs-11 col-sm-2">
+
+            </div>
+        </div>
+    </form>
+
+    @if (User.IsInRole("Admin") && Request.IsAuthenticated)
+    {
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <p class="text-center">
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+
+            <p class="text-center">
+                <a href="@Url.Action("JeweleryMVCPaging", "Jeweleries")" class="">Table View</a>
+            </p>
+        </div>
+    }
+</div>
+
+
+
+
+<table class="table data-table table-striped">
+    <tbody>
+        <tr>
+            <td class="row" id="jeweleryGrid">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-4 col-xs-4 book">
+                        <div class="course">
+                            <a href="@Url.Action("Details", "Jeweleries", new { id = item.ProductID })" class="course-img">
+                                <img src="~/Content/images/products/@item.ProductImage" alt="@item.ProductName" />
+                                <i class="course-link-icon flaticon-shopping-bag fa-link"></i>
+                            </a>
+                            <a class="course-title" href="@Url.Action("Details", "Jeweleries", new { id = item.ProductID })">@item.ProductName</a>
+                            <div class="course-details">
+                                <span class="course-category">@Html.DisplayFor(model => item.Material.MaterialName)</span>
+                                <span class="course-category">@Html.DisplayFor(model => item.Price)</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+@section scripts {
+    <script>
+        //Apply the jQuery plugin function
+        $(document).ready(function () {
+            $(".data-table").DataTable();
+        });
+    </script>
+}
+
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f1c54cdb5ab454b88af41fcdce61f52" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="StoreFrontModel.Fit" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.InvStatu" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Jewelery" Width="1.5" PointX="3.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Material" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Supplier" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.Type" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <AssociationConnector Association="StoreFrontModel.FK_Jeweleries_Fits" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreFrontModel.FK_Jeweleries_InvStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreFrontModel.FK_Jeweleries_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreFrontModel.FK_Jeweleries_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreFrontModel.FK_Jeweleries_Types" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StoreFrontModel.AspNetUserLogin" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StoreFrontModel.AspNetUser" Width="1.5" PointX="3.25" PointY="0.5" />
+        <EntityTypeShape EntityType="StoreFrontModel.UserDetail" Width="1.5" PointX="5.5" PointY="11.125" />
+        <AssociationConnector Association="StoreFrontModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="StoreFrontModel.FK_UserDetails_AspNetUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

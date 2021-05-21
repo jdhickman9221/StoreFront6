@@ -1,19 +1,38 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated) {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+@using StoreFront6.DATA.EF <!--Added to access userdetails-->
+
+
+@if (Request.IsAuthenticated)
+{
+    StoreFrontEntities db = new StoreFrontEntities();
+    string userID = User.Identity.GetUserId();//captured UserID in string, got it from ASPNET.Identity.
+    UserDetail currentUser = db.UserDetails.Where(ud => ud.UserID == userID).FirstOrDefault();//we are now casting the first matching ID into a new UserDetail obj. The ASP table User ID will be the value of the User ID of this new currentUser.
+
+    //We will also need to account for if there is no matching record.
+    string userFN = "Guest";
+    string favColor = "#cccccc";
+    //but if it we do get a match, use it to populate the value for the above variables.
+    if (currentUser != null)
+    {
+        userFN = currentUser.FirstName;
+        favColor = currentUser.FavoriteColor;
+    }
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "nav-link" }))
+    {
         @Html.AntiForgeryToken()
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        </ul>
+        <li class="nav-link" id="logout">
+            <a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log off</a>
+        </li>
     }
 }
-else {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+else
+{
+    <li class="nav-item">
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+    </li>
+    <li class="nav-item">
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "nav-link" })
+    </li>
 }

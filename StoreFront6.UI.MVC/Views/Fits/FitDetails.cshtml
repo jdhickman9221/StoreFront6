@@ -1,0 +1,20 @@
+﻿@model StoreFront6.DATA.EF.Fit
+
+<div>
+    <h4>Fit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FitName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FitID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

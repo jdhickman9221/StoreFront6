@@ -1,39 +1,112 @@
 ﻿@model StoreFront6.UI.MVC.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "First time user?";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2 class="text-center" style="padding-top: .5em;">@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+    <h4 class="text-center" style="padding-bottom: .5em;">Create a new account.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @*@Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3 " style="padding-top: .5em;">
+            @Html.TextBoxFor(m => m.FirstName, new { placeholder="First Name", @class = "form-control" })
         </div>
+
+
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        @*@Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.TextBoxFor(m => m.LastName, new { placeholder = "Last Name", @class = "form-control" })
         </div>
+    </div>
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.TextBoxFor(m => m.Address, new { placeholder = "Address", @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.TextBoxFor(m => m.City, new { placeholder = "City", @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.TextBoxFor(m => m.State, new { placeholder = "State", @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.Zip, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.TextBoxFor(m => m.Zip, new { placeholder = "Zip", @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.TextBoxFor(m => m.Phone, new { placeholder = "Phone", @class = "form-control" })
+        </div>
+
+
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        @*@Html.LabelFor(m => m.FavoriteColor, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.TextBoxFor(m => m.FavoriteColor, new { placeholder = "Favorite Color", @class = "form-control", type = "color" })
         </div>
     </div>
+
+
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+        @*@Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.TextBoxFor(m => m.Email, new { placeholder = "E-mail", @class = "form-control" })
         </div>
     </div>
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.PasswordFor(m => m.Password, new { placeholder = "Password", @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @*@Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })*@
+        <div class="col-md-6 offset-3">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirm Password", @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group d-flex justify-content-center"  >
+        <div >
+            <input type="submit" class="btn btn-primary" value="Register" />
+        </div>
+    </div>
+
 }
 
 @section Scripts {

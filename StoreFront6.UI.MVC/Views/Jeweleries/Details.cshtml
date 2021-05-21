@@ -1,0 +1,80 @@
+﻿@model StoreFront6.DATA.EF.Jewelery
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@*<h2 class="align-">@Model.ProductName</h2>*@
+
+<div style="padding-top: 3.5em;">
+    @*<h4>Jewelery</h4>
+        <hr />*@
+    <div class="row">
+        <div class="col-lg-6 mb-5 ftco-animate align-content-center">
+            <a href="~/Content/images/products/@Model.ProductImage" class="image-popup prod-img-bg">
+                <img src="~/Content/images/products/@Model.ProductImage" class="img-fluid" alt="@Model.ProductName">
+            </a>
+            <p class="text-center" style="padding-top: 1em;">(Click To Zoom)</p>
+        </div>
+        <div class="col-lg-6 product-details pl-md-5 ftco-animate" style="padding-top:;">
+            <h3>@Model.ProductName</h3>
+            <div class="rating d-flex">
+                <p class="text-left mr-4">
+                    <a href="#" class="mr-2">5.0</a>
+                    <a href="#"><span class="fa fa-star"></span></a>
+                    <a href="#"><span class="fa fa-star"></span></a>
+                    <a href="#"><span class="fa fa-star"></span></a>
+                    <a href="#"><span class="fa fa-star"></span></a>
+                    <a href="#"><span class="fa fa-star"></span></a>
+                </p>
+                <p class="text-left mr-4">
+                    <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+                </p>
+                <p class="text-left">
+                    <a href="#" class="mr-2" style="color: #000;">@Model.UnitsSold<span style="color: #bbb;"> Sold</span></a>
+                </p>
+            </div>
+            <h2>
+                @Html.DisplayFor(model => model.Price)
+            </h2>
+            <p>@Model.Description</p>
+
+            @if (Request.IsAuthenticated)
+            {
+                <p class="text-left">
+                    @using (Html.BeginForm("AddToCart", "Jeweleries", new { @jewelery = Model.ProductID }, FormMethod.Post, new { @class = "" }))
+                    {
+                        @Html.HiddenFor(x => x.ProductID)
+                        <span class="label">Quantity: </span>
+                        @Html.TextBox("Qty", 1, new { @class = "form-control", @style = "max-width: 50px; display: inline" })
+                        <input type="submit" value="Add To Cart" class="btn btn-primary" name="qty" />
+                    }
+                </p>
+            }
+            else
+            {
+                <p class="text-left" >
+                    @using (Html.BeginForm("AddToCart", "Jeweleries", new { @jewelery = Model.ProductID }, FormMethod.Post, new { @class = "" }))
+                    {
+                        @Html.HiddenFor(x => x.ProductID)
+                        <span class="label">Quantity: </span>
+                        @Html.TextBox("Qty", 1, new { @class = "form-control", @style = "max-width: 50px; display: inline" })
+                        <a class="btn btn-primary" href="@Url.Action("Login", "Account")">Add To Cart</a>
+                        
+                    }
+                </p>
+            }
+
+            @if (User.IsInRole("Admin") && Request.IsAuthenticated)
+            {
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }, new { @class = "btn btn-primary py-3 px-5 mr-2" })
+                    @Html.ActionLink("Cancel", "JeweleriesGrid", null, new { @class = "btn btn-primary py-3 px-5 mr-2" })
+                </p>
+            }
+        </div>
+    </div>
+</div>
+
+
+
