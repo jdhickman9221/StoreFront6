@@ -659,6 +659,7 @@ pre {
     }
 }
 
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1140px;
@@ -1663,6 +1664,8 @@ pre {
         margin-left: 91.66667%;
     }
 }
+
+
 
 @media (min-width: 1200px) {
     .col-xl {
@@ -3588,6 +3591,7 @@ input[type="button"].btn-block {
     }
 }
 
+
 @media (min-width: 1200px) {
     .dropdown-menu-xl-right {
         right: 0;
@@ -4756,7 +4760,7 @@ input[type="button"].btn-block {
 .navbar-nav {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: /*flex;*/
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -4936,7 +4940,9 @@ input[type="button"].btn-block {
     }
 }
 
-@media (min-width: 992px) {
+
+
+@media (min-width:375px) {
     .navbar-expand-lg {
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
@@ -4944,7 +4950,13 @@ input[type="button"].btn-block {
         flex-flow: row nowrap;
         -webkit-box-pack: start;
         -ms-flex-pack: start;
-        justify-content: flex-start;
+        justify-content: center;
+    }
+    .navbar-nav{
+        margin-bottom: 0;
+        padding-left: 0;
+
+
     }
 
         .navbar-expand-lg .navbar-nav {
@@ -4970,15 +4982,21 @@ input[type="button"].btn-block {
         }
 
         .navbar-expand-lg .navbar-collapse {
-            display: -webkit-box !important;
-            display: -ms-flexbox !important;
-            display: flex !important;
-            -ms-flex-preferred-size: auto;
-            flex-basis: auto;
+            display:flex;
+            /*display: -ms-flexbox !important;*/
+            /*display: flex !important;*/            
+            -ms-flex:auto;
+            width: 650px;
+            /*flex-basis: auto;*/
+            justify-content: center;
+            
         }
 
         .navbar-expand-lg .navbar-toggler {
-            display: none;
+            /*display: none;*/
+        }
+        ul.navbar-nav li{
+            padding-right: 2em;
         }
 }
 
@@ -7427,10 +7445,14 @@ button.bg-dark:focus {
     }
 }
 
+
+
 @media (min-width: 992px) {
     .d-lg-none {
         display: none !important;
     }
+
+
 
     .d-lg-inline {
         display: inline !important;
@@ -8179,6 +8201,8 @@ button.bg-dark:focus {
     }
 }
 
+
+
 @media (min-width: 992px) {
     .flex-lg-row {
         -webkit-box-orient: horizontal !important;
@@ -8186,6 +8210,8 @@ button.bg-dark:focus {
         -ms-flex-direction: row !important;
         flex-direction: row !important;
     }
+
+
 
     .flex-lg-column {
         -webkit-box-orient: vertical !important;
@@ -8609,17 +8635,12 @@ button.bg-dark:focus {
     }
 }
 
+
+
+
 @media (min-width: 992px) {
     .float-lg-left {
         float: left !important;
-    }
-
-    .float-lg-right {
-        float: right !important;
-    }
-
-    .float-lg-none {
-        float: none !important;
     }
 }
 
@@ -9224,7 +9245,7 @@ button.bg-dark:focus {
 
 .ml-auto,
 .mx-auto {
-    margin-left: auto !important;
+   padding-left: 0em;
 }
 
 @media (min-width: 576px) {
@@ -10095,10 +10116,15 @@ button.bg-dark:focus {
     }
 }
 
-@media (min-width: 992px) {
-    .m-lg-0 {
-        margin: 0 !important;
+
+
+    @media (min-width: 992px) {
+        .m-lg-0 {
+            margin: 0 !important;
+        }
     }
+
+
 
     .mt-lg-0,
     .my-lg-0 {
@@ -11031,6 +11057,8 @@ button.bg-dark:focus {
         text-align: left !important;
     }
 
+
+
     .text-lg-right {
         text-align: right !important;
     }
@@ -11039,6 +11067,8 @@ button.bg-dark:focus {
         text-align: center !important;
     }
 }
+
+
 
 @media (min-width: 1200px) {
     .text-xl-left {
@@ -11434,11 +11464,13 @@ h1, h2, h3, h4, h5,
 
     .ftco-navbar-light .navbar-brand:hover {
         color: #fff;
+        
     }
 
 @media (max-width: 991.98px) {
     .ftco-navbar-light .navbar-brand {
         color: #fff;
+        display: none;
     }
 }
 
@@ -11566,7 +11598,7 @@ h1, h2, h3, h4, h5,
 }
 
 .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
-    font-size: 14px;
+    /*font-size: inherit;*/
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     padding-left: 20px;
@@ -12966,11 +12998,12 @@ textarea.form-control {
 .about-author .desc h3 {
     font-size: 24px;
 }
-section#aboutMeBanner.ftco-section.ftco-no-pb{
+
+section#aboutMeBanner.ftco-section.ftco-no-pb {
     margin: 0em;
     padding: .25em;
-
 }
+
 .ftco-section {
     margin-top: .5em;
     padding-top: 1em;
@@ -13425,6 +13458,8 @@ section#aboutMeBanner.ftco-section.ftco-no-pb{
         background: #b7472a;
         z-index: -1;
     }
+
+
 
 @media (min-width: 992px) {
     .ftco-counter .overlay {

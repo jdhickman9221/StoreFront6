@@ -10,22 +10,52 @@
     letter-spacing: 1px;
     opacity: 1 !important;
 }
-.center{
-   display: block;   
-   margin-left: auto;
-   margin-right: auto;
-   width:50%;
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
-li#logout{
-    padding-top: ;
+li#logout {
+    padding-top:;
 }
 
-div.validation-summary-errors{
+div.validation-summary-errors {
     display: flex;
     justify-content: center;
     text-align: center;
 }
-ul{
+
+ul {
     list-style-type: none;
+}
+
+@media only screen and (max-width: 1319px) {
+    .navbar-expand-lg > .container, .navbar-expand-lg > .container-fluid {
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        margin: 0px;
+    }
+
+    div.navbar-expand-lg .navbar-collapse {
+        width: 600px;
+
+    }
+}
+
+@media  (max-width: 500px){
+    a.nav-link{
+        font-size: 10px;
+    }
+}
+
+a.navbar-brand{
+    padding-right: 3em;
+}
+@media (max-width: 1319px){
+    a.navbar-brand{
+        display: none;
+    }
 }

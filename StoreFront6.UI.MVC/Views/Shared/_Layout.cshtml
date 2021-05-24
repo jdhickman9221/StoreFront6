@@ -320,24 +320,24 @@
                     <div class="ftco-footer-widget mb-4 ml-md-4">
                         <h2 class="ftco-heading-2">My Accounts</h2>
                         <ul class="list-unstyled">
-                            
-                            @if (Request.IsAuthenticated)
-                            {
-                                <li>
-                                    <a href="@Url.Action("Register", "Account")">
-                                        <span class="fa fa-chevron-right mr-2"></span>Log
-                                    </a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li>
-                                    <a href="#">
-                                        <span class="fa fa-chevron-right mr-2"></span>
-                                        Register
-                                    </a>
-                                </li>
-                            }
+                            @Html.Partial("_LoginPartialFooter")
+                            @*@if (Request.IsAuthenticated)
+        {
+            <li>
+                <a href="@Url.Action("Register", "Account")">
+                    <span class="fa fa-chevron-right mr-2"></span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li>
+                <a href="#">
+                    <span class="fa fa-chevron-right mr-2"></span>
+                    Register
+                </a>
+            </li>
+        }*@
 
 
                             @*<li><a href="#"><span class="fa fa-chevron-right mr-2"></span>My Order</a></li>*@
@@ -348,10 +348,10 @@
                     <div class="ftco-footer-widget mb-4 ml-md-4">
                         <h2 class="ftco-heading-2">Information</h2>
                         <ul class="list-unstyled">
-                            <li><a href="@Url.Action("Index", "Home")"><span class="fa fa-chevron-right mr-2"></span>About us</a></li>
-                            <li><a href="@Url.Action("JeweleriesGrid","Jeweleries")"><span class="fa fa-chevron-right mr-2"></span>Shop</a></li>
-                            <li><a href="@Url.Action("Contact","Home")"><span class="fa fa-chevron-right mr-2"></span>Contact us</a></li>
-                            <li><a href="@Url.Action("Index","Jeweleries")"><span class="fa fa-chevron-right mr-2"></span>Term &amp; Conditions</a></li>
+                            <li><a class="fa fa-chevron-right mr-2" href="@Url.Action("Index", "Home")"> About Us</a></li>
+                            <li><a class="fa fa-chevron-right mr-2" href="@Url.Action("JeweleriesGrid","Jeweleries")"> Shop</a></li>
+                            <li><a class="fa fa-chevron-right mr-2" href="@Url.Action("Contact","Home")"> Contact us</a></li>
+                            <li><a class="fa fa-chevron-right mr-2" href="@Url.Action("Index","Jeweleries")"> Term &amp; Conditions</a></li>
                         </ul>
                     </div>
                 </div>              

@@ -921,6 +921,7 @@
     <Content Include="Views\Filters\GetStacks.cshtml" />
     <Content Include="Views\Filters\GetHoops.cshtml" />
     <Content Include="Views\Shared\_ProductTypes.cshtml" />
+    <Content Include="Views\Shared\_LoginPartialFooter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
