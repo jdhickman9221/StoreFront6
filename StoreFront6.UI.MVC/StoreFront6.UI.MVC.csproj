@@ -387,6 +387,8 @@
     <Content Include="Content\images\clickers.jpg" />
     <Content Include="Content\images\cloud.png" />
     <Content Include="Content\images\CodeDog.jpg" />
+    <Content Include="Content\images\favicon-16x16.png" />
+    <Content Include="Content\images\favicon-32x32.png" />
     <Content Include="Content\images\GetInTouchLogo.png" />
     <Content Include="Content\images\hangers.jpg" />
     <Content Include="Content\images\hoops.jpg" />

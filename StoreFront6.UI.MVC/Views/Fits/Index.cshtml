@@ -8,9 +8,12 @@
 <div id="MessageContent"></div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button id="toggleFitCreate" class="btn btn-default">Create New Size</button>
 </p>
-<table class="table">
+<div id="FitCreate">
+    @Html.Partial("FitCreate", new StoreFront6.DATA.EF.Fit())
+</div>
+<table id="FitTable"class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FitName)
@@ -20,13 +23,13 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr id="Fit-@item.FitID">
             <td>
                 @Html.DisplayFor(modelItem => item.FitName)
             </td>
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.FitID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.FitID }) |*@
+                    @Html.ActionLink("Details", "Details", new { id = item.FitID }) |*@
                 @*@Html.ActionLink("Delete", "Delete", new { id=item.FitID })*@
                 <a href="" class="DetailsLink" id="@item.FitID">Details</a>
                 <a href="" class="EditLink" id="@item.FitID">Edit</a>
@@ -45,8 +48,9 @@
             </td>
         </tr>
     }
-    <div id="FitDetails"></div>
+
 </table>
+<div id="FitDetails"></div>
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
@@ -87,8 +91,8 @@
         //Ajax Create
         //show the create form
         $("#FitCreate").hide();//start the page load with the create form hidden
-        $("toggleFitCreate").click(function () {
-            $('#PublisherCreate').toggle();//flip the create between show and hide.        
+        $("#toggleFitCreate").click(function () {
+            $('#FitCreate').toggle();//flip the create between show and hide.
         });
 
         //when the form is submitted, we format data (serialize) the data. Then notification (MessageContent) shows status updates.
@@ -98,7 +102,7 @@
         //3. on failure, notify the user of the error.
         //4. on success notify user reset form, and 'add' through ajax.
 
-        $('#PubisherCreateForm').submit(function (e) {
+        $('#FitCreateForm').submit(function (e) {
             var formData = $(this).serializeArray();//capturing all inputs from the form and storing them in a JSON array.
             e.preventDefault();
 
@@ -114,13 +118,13 @@
                     $("#MessageContent").html("<div class='alert alert-success'>Record Added!<div>");
 
                     //reset form
-                    $('#PublisherCreateForm')[0].reset();
+                    $('#FitCreateForm')[0].reset();
                     //add the row with the code below.
                     $(function () {
                         var row = '<tr>' +
                             '<td>' + foo.FitName + '<td>' + '<tr>'
-                        $('#PublishersTable').append(row);
-                            
+                        $('#FitTable').append(row);
+                        $('#FitCreate').toggle();
                     });
                 }
             });
@@ -132,13 +136,13 @@
             e.preventDefault();//keep page from refreshing.
             var fitID = $(this).attr("id");
 
-            var row = $("#Fit-" + fitID).children();//find all table data for that specific row. 
+            var row = $("#Fit-" + fitID).children();//find all table data for that specific row.
 
             orignalContent = {
                 FitID: fitID,
                 FitName: row[0].innerText
             };
-            $.get("/Fits/FitsEdit/" + fitID, function (data) {
+            $.get("/Fits/FitEdit/" + fitID, function (data) {
                 $('#Fit-' + fitID).replaceWith(
                     '<tr id="Fit-' + fitID + '"><td colspan="5">' + data + '</td></tr>'
                 );
@@ -164,7 +168,7 @@
                         var row = '<tr>' +
                             '<td>' + data.FitName + '</td>' +
                             '<td>Refresh to View Options</td>' + '</tr>';
-                        $('#Id-' + data.FitID).replaceWith(row);
+                        $('#Fit-' + data.FitID).replaceWith(row);
                     });
                 },
                 error: function (e) {
